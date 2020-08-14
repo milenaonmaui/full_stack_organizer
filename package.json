@@ -16,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/milenaonmaui/full_stack_organizer/issues"
   },
-  "homepage": "https://github.com/milenaonmaui/full_stack_organizer#readme"
+  "homepage": "https://github.com/milenaonmaui/full_stack_organizer#readme",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.7"
+  }
 }
