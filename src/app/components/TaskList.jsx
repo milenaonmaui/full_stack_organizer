@@ -24,12 +24,12 @@ function mapStateToProps(state, ownProps) {
     }
 }
 
-export const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        createNewTask(id) {
-            console.log("Creating new task...", id)
-            console.log(dispatch(requestTaskCreation(id)))
-        }
+
+const mapDispatchToProps = (dispatch, {id})=>({
+    createNewTask(){
+        console.log("Creating new task...", id)
+        console.log(dispatch(requestTaskCreation(id)));
     }
-}
-export const ConnectedTaskList = connect (mapStateToProps, mapDispatchToProps) (TaskList);
+});
+
+export const ConnectedTaskList = connect(mapStateToProps, mapDispatchToProps)(TaskList);
