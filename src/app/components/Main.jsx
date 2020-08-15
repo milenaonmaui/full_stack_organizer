@@ -6,6 +6,7 @@ import { ConnectedTaskList } from './TaskList'
 import {Router, Route} from 'react-router-dom'
 import {history} from '../store/history';
 import { ConnectedNavigation } from './Navigation'
+import { ConnectedTaskDetail } from './TaskDetail'
 
 export const Main = () => (
     <Router history={history}>
@@ -14,7 +15,9 @@ export const Main = () => (
                 <ConnectedNavigation />
                 {/*Make dashbboard only appear if the route has /dashboard */}
                 <Route exact path="/dashboard" render={() => (<ConnectedDashboard/>)}/>
-            
+                <Route exact
+                       path="/tasks/:id"
+                       render = {({match}) => (<ConnectedTaskDetail match={match} />)}/>
             </div>
 
         </Provider>
