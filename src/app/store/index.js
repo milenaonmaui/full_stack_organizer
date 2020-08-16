@@ -3,7 +3,7 @@ import {defaultState} from '../../server/defaultState';
 import {logger} from 'redux-logger'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
-import * as sagas from './sagas.mock'
+import * as sagas from './sagas'
 import * as mutations from './mutations'
 import { combineReducers } from 'redux';
 
