@@ -2,8 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { connectDB } from './connect-db';
+import './initialize-db';
+import path from 'path'
 
-let port = 7777;
+let port = process.env.PORT || 7777;
 
 //create a new express instance
 let app=express();
@@ -19,6 +21,12 @@ app.use(
     bodyParser.urlencoded({extended:true}),
     bodyParser.json()
 )
+if (process.env.NODE_ENV == `production`) {
+    app.use(express.static(path.resolve(__dirname,'../../dist')));
+    app.get('/*',(req,res)=>{
+        res.sendFile(path.resolve('index.html'));
+    });
+}
 
 export const addNewTask = async task => {
     let db = await connectDB();
