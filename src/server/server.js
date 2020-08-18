@@ -1,11 +1,16 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import { connectDB } from './connect-db';
-import './initialize-db';
-import path from 'path'
-
+//import express from 'express';
+//import cors from 'cors';
+//import bodyParser from 'body-parser';
+//import { connectDB } from './connect-db';
+//import './initialize-db';
+//import path from 'path'
+var express = require ('express')
+var cors = require('cors')
+var path = require('path')
+var bodyParser = require('body-parser')
+var connectDB = require('./connect-db')
 let port = process.env.PORT || 7777;
+
 
 //create a new express instance
 let app=express();
@@ -21,20 +26,21 @@ app.use(
     bodyParser.urlencoded({extended:true}),
     bodyParser.json()
 )
-if (process.env.NODE_ENV == `production`) {
-    app.use(express.static(path.resolve(__dirname,'../../dist')));
-    app.get('/*',(req,res)=>{
-        res.sendFile(path.resolve('index.html'));
-    });
-}
 
-export const addNewTask = async task => {
+app.use(express.static(path.resolve(__dirname,'../../dist')));
+app.get('/*',(req,res)=>{
+    res.sendFile(path.resolve('../../dist','index.html'));
+});
+
+
+const addNewTask = async task => {
     let db = await connectDB();
     let collection = db.collection(`tasks`);
     await collection.insertOne(task);
 }
+module.exports = addNewTask
 
-export const updateTask = async task => {
+const updateTask = async task => {
     let {id,group, isComplete, name} = task;
     let db = await connectDB();
     let collection = db.collection(`tasks`);
@@ -49,6 +55,8 @@ export const updateTask = async task => {
         await collection.updateOne({id},{$set:{isComplete}})
     }
 }
+
+module.exports = updateTask;
 app.post('/task/new', async (req,res)=>{
     let task=req.body.task;
     await addNewTask(task);
