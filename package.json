@@ -7,7 +7,7 @@
     "build": "webpack -p",
     "deploy": "npm run build && git commit -a -m deployment && git push heroku master",
     "dev": "webpack-dev-server --open",
-    "server": "babel-node src/server",
+    "server": "node src/server",
     "server-dev": "nodemon src/server --exec babel-node src/server",
     "start-dev": "concurrently \"npm run server-dev\" \"npm run dev\"",
     "server-spec": "babel-node src/server/server.spec",
@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/milenaonmaui/full_stack_organizer#readme",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.1",
     "@babel/node": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
